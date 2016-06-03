@@ -41,7 +41,7 @@ module FixHTMLSource
       # because the 'navigation' elements are already removed, 
       # and so there won't be a 'first'
       #
-      n.first.before("<mbp:pagebreak />")
+      n.first.before(doc.create_element("mbp:pagebreak"))
       n.remove
       puts "#{src_dir}/#{File.basename(file)}"
       File.open("#{src_dir}/#{File.basename(file)}", "w") {|f| f.puts doc}
