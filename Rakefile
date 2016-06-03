@@ -34,7 +34,7 @@ NCX_TOC    = "#{ARTIFACTS}/toc.ncx"
 OPF        = "#{ARTIFACTS}/sicp.opf"
 BOOK       = "#{ARTIFACTS}/sicp.mobi"
 LARGE_BOOK = "#{ARTIFACTS}/sicp-large.mobi"
-STRIPPER   = "kindlestrip/kindlestrip.py"
+STRIPPER   = "python kindlestrip/kindlestrip.py"
 LOG        = "#{ARTIFACTS}/kindlegen.log"
 
 # Clean list
