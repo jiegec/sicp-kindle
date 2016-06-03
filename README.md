@@ -1,3 +1,7 @@
+#### SICP-KINDLE
+
+Jiegec: do some slight update and refactor.
+
 #### Slight reformatting of the pages at
 
 http://mitpress.mit.edu/sicp/full-text/book/book.html
@@ -6,6 +10,8 @@ http://mitpress.mit.edu/sicp/full-text/book/book.html
 
 <pre>
       wget -r http://mitpress.mit.edu/sicp/full-text/book/book.html
+      # Jiegec: Using wget -r -nH -nd -np http://mitpress.mit.edu/sicp/full-text/book/book.html
+ 
 </pre>
 
 2 - used ~~hpricot~~ Nokogiri to:

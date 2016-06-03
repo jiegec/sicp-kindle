@@ -37,20 +37,20 @@ class XmlGenerator
   end
 
   def chapters
-    Dir["#{@src_dir}/book-Z-H*.html"].sort_by {|name| name[/\d+/].to_i}
+    Dir["#{@src_dir}/book-Z-H*.html"].sort_by { |name| name[/\d+/].to_i }
   end
 
   def navigation_points
     lines = []
     [
-    [9,9],
-    [13,13],
-    [19,19],
-    [25,25],
-    [30,30],
-    [36,"References"],
-    [37,"List of Exercises"],
-    [38,"Index"]
+      [9, "1 Building Abstractions with Procedures"],
+      [13, "2 Building Abstractions with Data"],
+      [19, "3 Modularity, Objects, and State"],
+      [25, "4 Metalinguistic Abstraction"],
+      [30, "5 Computing with Register Machines"],
+      [36, "References"],
+      [37, "List of Exercises"],
+      [38, "Index"]
     ].each_with_index do |chapter, i|
       number = i + 1
       label = chapter[1].is_a?(Fixnum) ? "Chapter #{number}" : chapter[1]
@@ -60,7 +60,7 @@ class XmlGenerator
       lines << "        <content src='#{@src_dir}/book-Z-H-#{chapter[0]}.html'/>"
       lines << "    </navPoint>"
     end
-    return lines
+    lines
   end
 
   def ncx_toc
