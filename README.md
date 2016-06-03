@@ -10,7 +10,7 @@ http://mitpress.mit.edu/sicp/full-text/book/book.html
 
 <pre>
       wget -r http://mitpress.mit.edu/sicp/full-text/book/book.html
-      # Jiegec: Using wget -r -nH -nd -np -m https://mitpress.mit.edu/sicp/full-text/book/book.html
+      # Jiegec: Go to content-orig and wget -r -nH -nd -np -m https://mitpress.mit.edu/sicp/full-text/book/book.html
  
 </pre>
 

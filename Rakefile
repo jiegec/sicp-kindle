@@ -29,6 +29,7 @@ require './lib/fix_html_source'
 
 PROJECT    = File.expand_path(File.dirname(__FILE__))
 SRC        = "#{PROJECT}/content"  # we need the absolute path for parts of the XML
+SRC_ORIG   = "#{PROJECT}/content-orig"
 ARTIFACTS  = "artifacts"
 NCX_TOC    = "#{ARTIFACTS}/toc.ncx"
 OPF        = "#{ARTIFACTS}/sicp.opf"
@@ -99,5 +100,5 @@ end
 
 desc "fix HTML if you got new source from MIT"
 task :fix_html_source do
-  FixHTMLSource.do SRC
+  FixHTMLSource.do SRC_ORIG, SRC
 end
