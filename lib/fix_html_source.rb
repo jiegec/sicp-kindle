@@ -32,7 +32,7 @@ module FixHTMLSource
   # add mobi-specific pagebreaks
   def self.do(src_orig_dir, src_dir)
     require 'nokogiri'
-    XmlGenerator.new(src_orig_dir).chapters.reject {|f| f == "book-Z-H-4.html"}.each do |file|
+    XmlGenerator.new(src_orig_dir).chapters.each do |file|
       doc = Nokogiri(File.open(file).read)
 
       n = doc.search(".navigation")
@@ -41,10 +41,12 @@ module FixHTMLSource
       # because the 'navigation' elements are already removed, 
       # and so there won't be a 'first'
       #
-      n.first.before(doc.create_element("mbp:pagebreak"))
+      # n.first.before(doc.create_element("mbp:pagebreak"))
+      n.first.before("<div style=\"page-break-before:always;\"></div>")
       n.remove
       puts "#{src_dir}/#{File.basename(file)}"
       File.open("#{src_dir}/#{File.basename(file)}", "w") {|f| f.puts doc}
     end
+    # FileUtils.copy "#{src_orig_dir}/book.html", "#{src_dir}/book.html"
   end
 end

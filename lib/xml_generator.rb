@@ -43,11 +43,39 @@ class XmlGenerator
   def navigation_points
     lines = []
     [
-      [9, "1 Building Abstractions with Procedures"],
-      [13, "2 Building Abstractions with Data"],
-      [19, "3 Modularity, Objects, and State"],
-      [25, "4 Metalinguistic Abstraction"],
-      [30, "5 Computing with Register Machines"],
+      [1, "Structure and Interpretation of Computer Programs"],
+      [4, "Contents"],
+      [5, "Foreword"],
+      [6, "Preface to the Second Edition"],
+      [7, "Preface to the First Edition"],
+      [8, "Acknowledgments"],
+      [9, "1 Building Abstractions with Procedures",
+       [[10, "1.1 The Elements of Programming"],
+        [11, "1.2 Procedures and the Processes They Generate"],
+        [12, "1.3 Formulating Abstractions with Higher-Order Procedures"]]],
+      [13, "2 Building Abstractions with Data",
+       [[14, "2.1 Introduction to Data Abstraction"],
+        [15, "2.2 Hierarchical Data and the Closure Property"],
+        [16, "2.3 Symbolic Data"],
+        [17, "2.4 Multiple Representations for Abstract Data"],
+        [18, "2.5 Systems with Generic Operations"]]],
+      [19, "3 Modularity, Objects, and State",
+       [[20, "3.1 Assignment and Local State"],
+        [21, "3.2 The Environment Model of Evaluation"],
+        [22, "3.3 Modeling with Mutable Data"],
+        [23, "3.4 Concurrency: Time Is of the Essence"],
+        [24, "3.5 Streams"]]],
+      [25, "4 Metalinguistic Abstraction",
+       [[26, "4.1 The Metacircular Evaluator"],
+        [27, "4.2 Variations on a Scheme -- Lazy Evaluation"],
+        [28, "4.3 Variations on a Scheme -- Nodeterministic Computing"],
+        [29, "4.4 Logic Programming"]]],
+      [30, "5 Computing with Register Machines",
+       [[31, "5.1 Designing Register Machines"],
+        [32, "5.2 A Register-Machine Simulator"],
+        [33, "5.3 Storage Allocation and Garbage Collection"],
+        [34, "5.4 The Explicit-Control Evaluator"],
+        [35, "5.5 Compliation"]]],
       [36, "References"],
       [37, "List of Exercises"],
       [38, "Index"]
@@ -58,6 +86,14 @@ class XmlGenerator
       lines << "    <navPoint id='navPoint-#{number}' playOrder='#{number}'>"
       lines << "        <navLabel><text>#{label}</text></navLabel>"
       lines << "        <content src='#{@src_dir}/book-Z-H-#{chapter[0]}.html'/>"
+      subnum = 0
+      chapter[2].each do |subchapter|
+        subnum = subnum + 1
+        lines << "        <navPoint id='navPoint-#{number}-#{subnum}'>"
+        lines << "            <navLabel><text>#{subchapter[1]}</text></navLabel>"
+        lines << "            <content src='#{@src_dir}/book-Z-H-#{subchapter[0]}.html'/>"
+        lines << "        </navPoint>"
+      end if chapter[2]
       lines << "    </navPoint>"
     end
     lines
@@ -76,24 +112,24 @@ class XmlGenerator
    </navMap>
 </ncx>
     }
-  end
+      end
 
-  def manifest_items
-    item_count = 0
-    chapters.inject([]) do |lines, chapter|
-      item_count += 1
-      lines << "          <item id='item#{item_count}' media-type='application/xhtml+xml' href='#{chapter}'></item>"
+      def manifest_items
+      item_count = 0
+      chapters.inject([]) do |lines, chapter|
+        item_count += 1
+        lines << "          <item id='item#{item_count}' media-type='application/xhtml+xml' href='#{chapter}'></item>"
+      end
     end
-  end
 
-  def item_refs
-    lines = []
-    manifest_items.size.times { |i| lines << "          <itemref idref='item#{i + 1}'/>"}
-    return lines
-  end
+    def item_refs
+      lines = []
+      manifest_items.size.times { |i| lines << "          <itemref idref='item#{i + 1}'/>"}
+      return lines
+    end
 
-  def opf
-    %Q{<?xml version="1.0" encoding="utf-8"?>
+    def opf
+      %Q{<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="BookId">
      <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
           <dc:title>Structure and Interpretation of Computer Programs</dc:title>
@@ -118,10 +154,10 @@ class XmlGenerator
      </spine>
      <tours></tours>
      <guide>
-         <reference type="toc" title="Table of Contents" href="#{@src_dir}/book-Z-H-4.html%23chap_Temp_1"></reference>
-         <reference type="start" title="Startup Page" href="#{@src_dir}/book-Z-H-9.html%23start"></reference>
+         <reference type="toc" title="Table of Contents" href="#{@src_dir}/book-Z-H-4.html"></reference>
+         <reference type="start" title="Startup Page" href="#{@src_dir}/book-Z-H-9.html"></reference>
      </guide>
 </package>
     }
-  end
+    end
 end
