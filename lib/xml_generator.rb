@@ -112,24 +112,24 @@ class XmlGenerator
    </navMap>
 </ncx>
     }
-      end
+  end
 
-      def manifest_items
-      item_count = 0
-      chapters.inject([]) do |lines, chapter|
-        item_count += 1
-        lines << "          <item id='item#{item_count}' media-type='application/xhtml+xml' href='#{chapter}'></item>"
-      end
+  def manifest_items
+    item_count = 0
+    chapters.inject([]) do |lines, chapter|
+      item_count += 1
+      lines << "          <item id='item#{item_count}' media-type='application/xhtml+xml' href='#{chapter}'></item>"
     end
+  end
 
-    def item_refs
-      lines = []
-      manifest_items.size.times { |i| lines << "          <itemref idref='item#{i + 1}'/>"}
-      return lines
-    end
+  def item_refs
+    lines = []
+    manifest_items.size.times { |i| lines << "          <itemref idref='item#{i + 1}'/>"}
+    return lines
+  end
 
-    def opf
-      %Q{<?xml version="1.0" encoding="utf-8"?>
+  def opf
+    %Q{<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="BookId">
      <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
           <dc:title>Structure and Interpretation of Computer Programs</dc:title>
@@ -159,5 +159,5 @@ class XmlGenerator
      </guide>
 </package>
     }
-    end
+  end
 end

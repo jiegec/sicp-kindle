@@ -42,7 +42,7 @@ module FixHTMLSource
       # and so there won't be a 'first'
       #
       # n.first.before(doc.create_element("mbp:pagebreak"))
-      n.first.before("<div style=\"page-break-before:always;\"></div>")
+      # n.first.before("<div style=\"page-break-before:always;\"></div>")
       n.remove
       puts "#{src_dir}/#{File.basename(file)}"
       File.open("#{src_dir}/#{File.basename(file)}", "w") {|f| f.puts doc}
